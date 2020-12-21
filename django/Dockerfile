@@ -9,11 +9,7 @@ WORKDIR /project
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt .
+COPY . .
 RUN pip install -r requirements.txt
 
-COPY dockertest/. .
-
-# COPY entrypoint.sh .
-
-# ENTRYPOINT ["sh", "entrypoint.sh"]
+CMD gunicorn --bind 0.0.0.0:8000 dockertest.wsgi
